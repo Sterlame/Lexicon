@@ -113,6 +113,19 @@
     color: var(--text);
   }
 
+  .trainer-badge {
+    position: absolute;
+    top: -4px;
+    right: -4px;
+    background: var(--gold);
+    color: #0f0f13;
+    border-radius: 10px;
+    font-size: 10px;
+    padding: 1px 5px;
+    font-family: 'Helvetica Neue', Arial, sans-serif;
+    line-height: 1.4;
+  }
+
   .dict-count {
     position: absolute;
     top: -4px;
@@ -459,6 +472,493 @@
     border-color: transparent;
   }
   .btn-remove:hover { color: #aa5555; border-color: #aa555540; }
+
+  /* ── SWIPEABLE HISTORY ── */
+  .swipe-stage {
+    position: relative;
+    height: 480px;
+    touch-action: pan-y;
+    user-select: none;
+  }
+
+  .swipe-card {
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 28px 26px;
+    cursor: grab;
+    transition: transform 0.25s ease, opacity 0.25s ease;
+  }
+
+  .swipe-card.dragging { transition: none; cursor: grabbing; }
+
+  .swipe-card .sc-title {
+    font-size: 32px;
+    font-weight: bold;
+    color: #f0ece4;
+    letter-spacing: -0.02em;
+    margin-bottom: 4px;
+  }
+
+  .swipe-card .sc-meta {
+    font-size: 11px;
+    color: var(--text5);
+    font-family: 'Helvetica Neue', Arial, sans-serif;
+    letter-spacing: 0.05em;
+    margin-bottom: 16px;
+    display: flex;
+    gap: 10px;
+    align-items: center;
+    flex-wrap: wrap;
+  }
+
+  .swipe-card .sc-def {
+    font-size: 15px;
+    line-height: 1.65;
+    color: var(--text2);
+    margin-bottom: 16px;
+  }
+
+  .swipe-card .sc-ex {
+    font-size: 13px;
+    line-height: 1.6;
+    color: var(--text3);
+    font-style: italic;
+    border-top: 1px solid var(--border2);
+    padding-top: 14px;
+  }
+
+  .swipe-hint {
+    text-align: center;
+    font-size: 12px;
+    color: var(--text5);
+    font-family: 'Helvetica Neue', Arial, sans-serif;
+    margin-top: 16px;
+    letter-spacing: 0.04em;
+  }
+
+  .swipe-progress {
+    display: flex;
+    gap: 4px;
+    justify-content: center;
+    margin-top: 14px;
+    flex-wrap: wrap;
+    max-width: 100%;
+  }
+
+  .swipe-dot {
+    width: 5px; height: 5px;
+    border-radius: 50%;
+    background: var(--border);
+  }
+  .swipe-dot.seen { background: var(--text4); }
+
+  .swipe-nav-btns {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 16px;
+    gap: 10px;
+  }
+
+  .swipe-nav-btns button {
+    flex: 1;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    color: var(--text3);
+    border-radius: 8px;
+    padding: 12px;
+    font-size: 13px;
+    font-family: 'Helvetica Neue', Arial, sans-serif;
+    cursor: pointer;
+  }
+  .swipe-nav-btns button:disabled { opacity: 0.3; cursor: default; }
+
+  /* ── TRAINER ── */
+  .trainer-intro {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 32px 28px;
+    text-align: center;
+  }
+
+  .trainer-intro h2 {
+    font-size: 22px;
+    color: var(--text);
+    margin-bottom: 10px;
+    font-weight: bold;
+  }
+
+  .trainer-intro p {
+    font-size: 14px;
+    color: var(--text3);
+    line-height: 1.6;
+    margin-bottom: 24px;
+    font-family: 'Helvetica Neue', Arial, sans-serif;
+  }
+
+  .btn-start {
+    background: var(--gold);
+    color: #0f0f13;
+    border: none;
+    border-radius: 8px;
+    padding: 14px 32px;
+    font-size: 14px;
+    font-weight: bold;
+    font-family: 'Helvetica Neue', Arial, sans-serif;
+    cursor: pointer;
+    letter-spacing: 0.02em;
+  }
+
+  .trainer-progress-bar {
+    height: 6px;
+    background: var(--border2);
+    border-radius: 3px;
+    overflow: hidden;
+    margin-bottom: 24px;
+  }
+
+  .trainer-progress-fill {
+    height: 100%;
+    background: var(--gold);
+    border-radius: 3px;
+    transition: width 0.3s ease;
+  }
+
+  .exercise-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 28px 26px;
+  }
+
+  .exercise-type-label {
+    font-size: 11px;
+    color: var(--gold);
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    font-family: 'Helvetica Neue', Arial, sans-serif;
+    margin-bottom: 14px;
+  }
+
+  .exercise-prompt {
+    font-size: 17px;
+    line-height: 1.6;
+    color: var(--text2);
+    margin-bottom: 20px;
+  }
+
+  .exercise-prompt .blank-word {
+    color: var(--gold);
+    font-weight: bold;
+  }
+
+  .exercise-word-ref {
+    font-size: 13px;
+    color: var(--text4);
+    font-family: 'Helvetica Neue', Arial, sans-serif;
+    margin-bottom: 18px;
+    padding: 12px 14px;
+    background: var(--surface2);
+    border-radius: 8px;
+    line-height: 1.5;
+  }
+
+  .exercise-input {
+    width: 100%;
+    background: var(--surface2);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 14px;
+    color: var(--text);
+    font-size: 15px;
+    font-family: 'Georgia', serif;
+    margin-bottom: 16px;
+    resize: vertical;
+    min-height: 70px;
+  }
+
+  .exercise-input:focus { outline: none; border-color: var(--gold); }
+
+  .choice-list { display: flex; flex-direction: column; gap: 10px; margin-bottom: 16px; }
+
+  .choice-btn {
+    text-align: left;
+    background: var(--surface2);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 14px 16px;
+    color: var(--text2);
+    font-size: 14px;
+    font-family: 'Georgia', serif;
+    cursor: pointer;
+    line-height: 1.5;
+    transition: all 0.15s;
+  }
+
+  .choice-btn:hover { border-color: var(--text4); }
+  .choice-btn.correct { border-color: var(--verb); background: #5BAD8A15; color: var(--text); }
+  .choice-btn.incorrect { border-color: #d47a7a; background: #d47a7a15; color: var(--text); }
+
+  .exercise-actions {
+    display: flex;
+    gap: 8px;
+    justify-content: flex-end;
+  }
+
+  .btn-submit {
+    background: var(--gold);
+    color: #0f0f13;
+    border: none;
+    border-radius: 6px;
+    padding: 10px 22px;
+    font-size: 13px;
+    font-weight: bold;
+    font-family: 'Helvetica Neue', Arial, sans-serif;
+    cursor: pointer;
+  }
+  .btn-submit:disabled { opacity: 0.3; cursor: default; }
+
+  .reveal-box {
+    margin-top: 16px;
+    padding: 16px;
+    background: var(--surface2);
+    border-radius: 8px;
+    border-left: 3px solid var(--gold);
+  }
+
+  .reveal-box .reveal-label {
+    font-size: 11px;
+    color: var(--text4);
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    font-family: 'Helvetica Neue', Arial, sans-serif;
+    margin-bottom: 6px;
+  }
+
+  .reveal-box .reveal-text {
+    font-size: 14px;
+    color: var(--text2);
+    line-height: 1.6;
+    font-style: italic;
+  }
+
+  .session-complete {
+    text-align: center;
+    padding: 40px 28px;
+  }
+
+  .session-complete .sc-emoji { font-size: 48px; margin-bottom: 16px; }
+  .session-complete h2 { font-size: 22px; color: var(--text); margin-bottom: 8px; }
+  .session-complete p { font-size: 14px; color: var(--text3); font-family: 'Helvetica Neue', Arial, sans-serif; margin-bottom: 24px; }
+
+  .empty-trainer {
+    color: var(--text4);
+    font-size: 15px;
+    text-align: center;
+    margin-top: 48px;
+    line-height: 1.8;
+  }
+  .empty-trainer small { font-size: 13px; color: var(--text5); display: block; }
+
+  /* ── TRAINER SETUP ── */
+  .setup-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 28px 26px;
+  }
+
+  .setup-card h2 {
+    font-size: 20px;
+    color: var(--text);
+    margin-bottom: 6px;
+  }
+
+  .setup-sub {
+    font-size: 13px;
+    color: var(--text3);
+    font-family: 'Helvetica Neue', Arial, sans-serif;
+    margin-bottom: 22px;
+    line-height: 1.5;
+  }
+
+  .setup-section {
+    margin-bottom: 22px;
+  }
+
+  .setup-label {
+    font-size: 11px;
+    color: var(--text4);
+    text-transform: uppercase;
+    letter-spacing: 0.07em;
+    font-family: 'Helvetica Neue', Arial, sans-serif;
+    margin-bottom: 10px;
+  }
+
+  .mode-toggle {
+    display: flex;
+    gap: 8px;
+  }
+
+  .mode-btn {
+    flex: 1;
+    background: var(--surface2);
+    border: 1px solid var(--border);
+    color: var(--text3);
+    border-radius: 8px;
+    padding: 12px;
+    font-size: 13px;
+    font-family: 'Helvetica Neue', Arial, sans-serif;
+    cursor: pointer;
+    transition: all 0.15s;
+  }
+
+  .mode-btn.selected {
+    border-color: var(--gold);
+    background: #c9a84c12;
+    color: var(--gold);
+  }
+
+  .word-picker-list {
+    max-height: 260px;
+    overflow-y: auto;
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    margin-top: 12px;
+    padding-right: 4px;
+  }
+
+  .word-pick-row {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    background: var(--surface2);
+    border: 1px solid var(--border2);
+    border-radius: 8px;
+    padding: 10px 14px;
+    cursor: pointer;
+    font-family: 'Helvetica Neue', Arial, sans-serif;
+  }
+
+  .word-pick-row.checked {
+    border-color: var(--noun);
+    background: #6B7FD712;
+  }
+
+  .word-pick-check {
+    width: 16px; height: 16px;
+    border-radius: 4px;
+    border: 1px solid var(--text4);
+    flex-shrink: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 11px;
+    color: var(--noun);
+  }
+
+  .word-pick-row.checked .word-pick-check {
+    border-color: var(--noun);
+    background: #6B7FD730;
+  }
+
+  .word-pick-name {
+    font-size: 14px;
+    color: var(--text2);
+    font-family: 'Georgia', serif;
+    flex: 1;
+  }
+
+  .word-pick-count {
+    font-size: 11px;
+    color: var(--text5);
+  }
+
+  .pick-actions {
+    display: flex;
+    gap: 8px;
+    margin-top: 10px;
+    font-family: 'Helvetica Neue', Arial, sans-serif;
+  }
+
+  .pick-actions button {
+    background: transparent;
+    border: 1px solid var(--border);
+    color: var(--text4);
+    border-radius: 6px;
+    padding: 6px 12px;
+    font-size: 11px;
+    cursor: pointer;
+  }
+
+  .length-options {
+    display: flex;
+    gap: 8px;
+  }
+
+  .length-btn {
+    flex: 1;
+    background: var(--surface2);
+    border: 1px solid var(--border);
+    color: var(--text3);
+    border-radius: 8px;
+    padding: 10px;
+    font-size: 13px;
+    font-family: 'Helvetica Neue', Arial, sans-serif;
+    cursor: pointer;
+  }
+
+  .length-btn.selected {
+    border-color: var(--gold);
+    color: var(--gold);
+    background: #c9a84c12;
+  }
+
+  .setup-warning {
+    font-size: 12px;
+    color: #c47a3b;
+    font-family: 'Helvetica Neue', Arial, sans-serif;
+    margin-bottom: 14px;
+    line-height: 1.5;
+  }
+
+  /* ── HINT BUTTON ── */
+  .hint-row {
+    display: flex;
+    justify-content: flex-start;
+    margin-bottom: 14px;
+  }
+
+  .btn-hint {
+    background: transparent;
+    border: 1px solid var(--border);
+    color: var(--text4);
+    border-radius: 6px;
+    padding: 7px 14px;
+    font-size: 12px;
+    font-family: 'Helvetica Neue', Arial, sans-serif;
+    cursor: pointer;
+    transition: all 0.15s;
+  }
+
+  .btn-hint:hover { border-color: var(--gold); color: var(--gold); }
+  .btn-hint:disabled { opacity: 0.3; cursor: default; }
+
+  .hint-box {
+    background: #c9a84c12;
+    border: 1px solid #c9a84c35;
+    border-radius: 8px;
+    padding: 10px 14px;
+    margin-bottom: 16px;
+    font-size: 13px;
+    color: var(--gold);
+    font-family: 'Helvetica Neue', Arial, sans-serif;
+    line-height: 1.5;
+  }
 </style>
 </head>
 <body>
@@ -480,6 +980,9 @@
     My Dictionary
     <span class="dict-count" id="dictCount" style="display:none"></span>
   </button>
+  <button onclick="showPage('trainer')" style="position:relative">
+    Trainer
+  </button>
 </nav>
 
 <main>
@@ -492,7 +995,7 @@
 
   <!-- HISTORY -->
   <div class="page" id="page-history">
-    <div class="section-label">Previous words</div>
+    <div class="section-label">Previous words · swipe or tap to browse</div>
     <div id="historyContent"></div>
   </div>
 
@@ -501,6 +1004,11 @@
     <div id="nudgeBanner"></div>
     <div class="section-label" id="dictLabel">Saved words</div>
     <div id="dictContent"></div>
+  </div>
+
+  <!-- TRAINER -->
+  <div class="page" id="page-trainer">
+    <div id="trainerContent"></div>
   </div>
 </main>
 
@@ -705,7 +1213,7 @@ function isWordSaved(word) { return !!getDict()[word]; }
 function saveWord(word) {
   const dict = getDict();
   if (!dict[word]) {
-    dict[word] = { savedOn: todayStr(), usedDates: [], streak: 0 };
+    dict[word] = { savedOn: todayStr(), usedDates: [], streak: 0, mastery: 'new', correctStreak: 0, seenCount: 0 };
     saveDict(dict);
   }
 }
@@ -738,6 +1246,50 @@ function usedToday(word) {
 function removeWord(word) {
   const dict = getDict();
   delete dict[word];
+  saveDict(dict);
+}
+
+// ── Mastery state machine ─────────────────────────────────────────
+const MASTERY_ORDER = ['new', 'learning', 'strong'];
+
+function ensureMasteryFields(word) {
+  const dict = getDict();
+  if (!dict[word]) return null;
+  const entry = dict[word];
+  if (entry.mastery === undefined) entry.mastery = 'new';
+  if (entry.correctStreak === undefined) entry.correctStreak = 0;
+  if (entry.seenCount === undefined) entry.seenCount = 0;
+  return entry;
+}
+
+function getMastery(word) {
+  const entry = ensureMasteryFields(word);
+  return entry ? entry.mastery : 'new';
+}
+
+// difficultyTier of the exercise type just answered: 'recognition' | 'light' | 'production'
+function recordTrainerResult(word, correct, difficultyTier) {
+  if (!isWordSaved(word)) saveWord(word);
+  const dict = getDict();
+  const entry = ensureMasteryFields(word);
+  entry.seenCount++;
+
+  if (correct) {
+    entry.correctStreak++;
+    const currentIdx = MASTERY_ORDER.indexOf(entry.mastery);
+    // Promote based on tier cleared and streak
+    if (difficultyTier === 'production' && entry.correctStreak >= 1) {
+      entry.mastery = 'strong';
+    } else if (difficultyTier === 'light' && entry.correctStreak >= 2 && currentIdx < 1) {
+      entry.mastery = 'learning';
+    } else if (difficultyTier === 'recognition' && entry.correctStreak >= 2 && currentIdx < 1) {
+      entry.mastery = 'learning';
+    }
+  } else {
+    entry.correctStreak = 0;
+    const currentIdx = MASTERY_ORDER.indexOf(entry.mastery);
+    if (currentIdx > 0) entry.mastery = MASTERY_ORDER[currentIdx - 1]; // demote one tier, not to zero
+  }
   saveDict(dict);
 }
 
@@ -809,49 +1361,574 @@ function onRemove(word) {
   renderToday();
 }
 
-// ── History ──────────────────────────────────────────────────────
-let historyShown = 7;
+// ── History (swipeable) ─────────────────────────────────────────
+let historyIndex = 0; // 0 = most recent past word
+let historyWords = [];
+
+function buildHistoryWords() {
+  const idx = getDayIndex();
+  historyWords = [];
+  for (let i = 0; i < idx; i++) {
+    historyWords.push(WORDS[idx - 1 - i]); // most recent first
+  }
+}
 
 function renderHistory() {
-  const idx = getDayIndex();
+  buildHistoryWords();
   const container = document.getElementById('historyContent');
-  if (idx === 0) {
+  if (historyWords.length === 0) {
     container.innerHTML = `<div class="empty-state">No history yet.<small>Come back tomorrow for your first entry.</small></div>`;
     return;
   }
-  const dict = getDict();
-  const count = Math.min(historyShown, idx);
-  let html = '<div class="history-list">';
-  for (let i = 0; i < count; i++) {
-    const w = WORDS[idx - 1 - i];
-    const c = POS_COLOR[w.pos] || '#888';
-    const daysAgo = i + 1;
-    const inDict = !!dict[w.word];
-    const usedCount = inDict ? dict[w.word].usedDates.length : 0;
-    html += `
-      <div class="history-card">
-        <div class="hw">
-          <div><span class="history-word">${w.word}</span><span class="history-pos" style="color:${c}">${w.pos}</span></div>
-          <div class="history-def">${w.definition}</div>
-        </div>
-        <div class="history-meta">
-          ${daysAgo === 1 ? 'yesterday' : daysAgo + 'd ago'}
-          ${inDict ? `<br><span style="color:var(--verb)">saved</span>` : ''}
-          ${usedCount > 0 ? `<br><span style="color:var(--text4)">used ${usedCount}×</span>` : ''}
-        </div>
-      </div>`;
-  }
-  html += '</div>';
-  if (count < idx) {
-    html += `<button class="load-more" onclick="loadMoreHistory()">Load more</button>`;
-  }
-  container.innerHTML = html;
+  historyIndex = Math.min(historyIndex, historyWords.length - 1);
+
+  container.innerHTML = `
+    <div class="swipe-stage" id="swipeStage"></div>
+    <div class="swipe-nav-btns">
+      <button id="swipePrev" onclick="historyStep(1)">← Older</button>
+      <button id="swipeNext" onclick="historyStep(-1)">Newer →</button>
+    </div>
+    <div class="swipe-progress" id="swipeProgress"></div>
+    <div class="swipe-hint">Swipe left/right, or use the buttons</div>
+  `;
+  renderSwipeCard();
+  renderSwipeProgress();
+  attachSwipeHandlers();
 }
 
-function loadMoreHistory() {
-  historyShown += 7;
-  renderHistory();
+function dict_getEntry(word) {
+  const dict = getDict();
+  return dict[word] || null;
 }
+
+function renderSwipeCard() {
+  const w = historyWords[historyIndex];
+  const c = POS_COLOR[w.pos] || '#888';
+  const entry = dict_getEntry(w.word);
+  const daysAgo = historyIndex + 1;
+  const stage = document.getElementById('swipeStage');
+  stage.innerHTML = `
+    <div class="swipe-card" id="swipeCard">
+      <div class="sc-title">${w.word}</div>
+      <div class="sc-meta">
+        ${posTag(w.pos)}
+        <span>${daysAgo === 1 ? 'yesterday' : daysAgo + 'd ago'}</span>
+        ${entry ? '<span style="color:var(--verb)">saved</span>' : ''}
+        ${entry && entry.usedDates.length > 0 ? `<span>used ${entry.usedDates.length}×</span>` : ''}
+      </div>
+      <div class="sc-def">${w.definition}</div>
+      <div class="sc-ex">"${w.example}"</div>
+    </div>
+  `;
+  document.getElementById('swipePrev').disabled = historyIndex >= historyWords.length - 1;
+  document.getElementById('swipeNext').disabled = historyIndex <= 0;
+}
+
+function renderSwipeProgress() {
+  const wrap = document.getElementById('swipeProgress');
+  const total = historyWords.length;
+  const maxDots = 40;
+  if (total <= maxDots) {
+    wrap.innerHTML = historyWords.map((_, i) =>
+      `<div class="swipe-dot ${i <= historyIndex ? 'seen' : ''}"></div>`
+    ).join('');
+  } else {
+    wrap.innerHTML = `<div style="font-size:11px;color:var(--text5);font-family:'Helvetica Neue',Arial,sans-serif">${historyIndex + 1} / ${total}</div>`;
+  }
+}
+
+function historyStep(dir) {
+  // dir: 1 = older (increase index), -1 = newer (decrease index)
+  const newIndex = historyIndex + dir;
+  if (newIndex < 0 || newIndex > historyWords.length - 1) return;
+  historyIndex = newIndex;
+  renderSwipeCard();
+  renderSwipeProgress();
+}
+
+function attachSwipeHandlers() {
+  const card = document.getElementById('swipeCard');
+  if (!card) return;
+  let startX = 0, currentX = 0, dragging = false;
+
+  function onStart(x) { dragging = true; startX = x; currentX = x; card.classList.add('dragging'); }
+  function onMove(x) {
+    if (!dragging) return;
+    currentX = x;
+    const dx = currentX - startX;
+    card.style.transform = `translateX(${dx}px) rotate(${dx * 0.03}deg)`;
+    card.style.opacity = 1 - Math.min(Math.abs(dx) / 400, 0.5);
+  }
+  function onEnd() {
+    if (!dragging) return;
+    dragging = false;
+    card.classList.remove('dragging');
+    const dx = currentX - startX;
+    if (Math.abs(dx) > 80) {
+      // swipe left = older (next), swipe right = newer (prev)
+      historyStep(dx < 0 ? 1 : -1);
+    } else {
+      card.style.transform = '';
+      card.style.opacity = '';
+    }
+  }
+
+  card.addEventListener('touchstart', e => onStart(e.touches[0].clientX), { passive: true });
+  card.addEventListener('touchmove', e => onMove(e.touches[0].clientX), { passive: true });
+  card.addEventListener('touchend', onEnd);
+
+  card.addEventListener('mousedown', e => onStart(e.clientX));
+  window.addEventListener('mousemove', e => onMove(e.clientX));
+  window.addEventListener('mouseup', onEnd);
+}
+
+// ── Trainer ──────────────────────────────────────────────────────
+let trainerSession = null; // { questions: [], current: 0 }
+let trainerSetup = { mode: 'auto', selectedWords: [], length: 8 };
+
+const TIER_EXERCISES = {
+  recognition: ['define', 'synonym'],
+  light: ['blank', 'firstletter'],
+  production: ['sentence', 'swap'],
+};
+
+function exerciseTierFor(type) {
+  for (const tier in TIER_EXERCISES) {
+    if (TIER_EXERCISES[tier].includes(type)) return tier;
+  }
+  return 'recognition';
+}
+
+function getTrainerPool() {
+  const dict = getDict();
+  const dictWords = Object.keys(dict).map(w => WORDS.find(x => x.word === w)).filter(Boolean);
+  buildHistoryWords();
+  const allSeen = historyWords.concat([WORDS[getDayIndex()]]);
+  return { dictWords, allSeen };
+}
+
+function pickWeightedWord(pool, excludeWords) {
+  const { dictWords, allSeen } = pool;
+  const useDict = dictWords.length > 0 && Math.random() < 0.7;
+  let candidates = useDict ? dictWords : allSeen;
+  candidates = candidates.filter(w => !excludeWords.includes(w.word));
+  if (candidates.length === 0) candidates = allSeen.filter(w => !excludeWords.includes(w.word));
+  if (candidates.length === 0) candidates = allSeen;
+  return candidates[Math.floor(Math.random() * candidates.length)];
+}
+
+function randomOtherWord(excludeWord) {
+  const others = WORDS.filter(w => w.word !== excludeWord);
+  return others[Math.floor(Math.random() * others.length)];
+}
+
+// pick an exercise type appropriate to the word's current mastery tier
+function pickTypeForWord(word) {
+  const mastery = getMastery(word.word); // 'new' | 'learning' | 'strong'
+  const tierMap = { new: 'recognition', learning: 'light', strong: 'production' };
+  const tier = tierMap[mastery] || 'recognition';
+  const options = TIER_EXERCISES[tier];
+  return options[Math.floor(Math.random() * options.length)];
+}
+
+function makeHint(word, type) {
+  switch (type) {
+    case 'blank':
+    case 'firstletter':
+      return `Starts with "${word.word[0].toUpperCase()}", ${word.word.length} letters, pronounced ${word.pronunciation}.`;
+    case 'define':
+      return `It's a ${word.pos}. Etymology: ${word.etymology}.`;
+    case 'sentence':
+    case 'swap':
+      return `Think ${word.pos} — ${word.definition.split(';')[0]}.`;
+    case 'synonym':
+      return `Reread the definition closely: ${word.definition}`;
+    default:
+      return word.definition;
+  }
+}
+
+function buildExercise(word, type) {
+  const hint = makeHint(word, type);
+  const tier = exerciseTierFor(type);
+  switch (type) {
+    case 'sentence':
+      return {
+        type: 'sentence', word, hint, tier,
+        prompt: `Write your own sentence using <span class="blank-word">${word.word}</span>.`,
+        ref: `${word.word} (${word.pos}) — ${word.definition}`,
+      };
+    case 'blank': {
+      const blanked = word.example.replace(new RegExp(word.word, 'i'), '_____');
+      return {
+        type: 'blank', word, hint, tier,
+        prompt: blanked,
+        ref: `Definition: ${word.definition}`,
+        answer: word.word.toLowerCase(),
+      };
+    }
+    case 'firstletter': {
+      const blanked = word.example.replace(new RegExp(word.word, 'i'), `${word.word[0]}_____`);
+      return {
+        type: 'firstletter', word, hint, tier,
+        prompt: blanked,
+        ref: `Definition: ${word.definition}`,
+        answer: word.word.toLowerCase(),
+      };
+    }
+    case 'swap': {
+      const plain = word.example.replace(new RegExp(word.word, 'i'), '[the right word]');
+      return {
+        type: 'swap', word, hint, tier,
+        prompt: `Rewrite this sentence, swapping in <span class="blank-word">${word.word}</span> naturally:<br><br>"${plain}"`,
+        ref: `${word.word} (${word.pos}) — ${word.definition}`,
+      };
+    }
+    case 'define': {
+      // multiple choice: pick the correct definition among 3 decoys
+      const decoys = [];
+      while (decoys.length < 3) {
+        const candidate = WORDS[Math.floor(Math.random() * WORDS.length)];
+        if (candidate.word !== word.word && !decoys.some(d => d.definition === candidate.definition)) {
+          decoys.push(candidate);
+        }
+      }
+      const options = [word.definition, ...decoys.map(d => d.definition)];
+      for (let i = options.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [options[i], options[j]] = [options[j], options[i]];
+      }
+      return {
+        type: 'define', word, hint, tier,
+        prompt: `What does <span class="blank-word">${word.word}</span> mean?`,
+        ref: `${word.pos} · ${word.pronunciation}`,
+        options,
+        correctIndex: options.indexOf(word.definition),
+      };
+    }
+    case 'synonym': {
+      // Show target word + a second word; ask if they mean roughly the same thing.
+      // Build a deliberate yes/no pair: 50% of the time the second word IS the target
+      // re-shown under a paraphrased definition (true), 50% of the time it's an unrelated word (false).
+      const isMatch = Math.random() < 0.5;
+      let pairWord, correctAnswer;
+      if (isMatch) {
+        pairWord = word;
+        correctAnswer = true;
+      } else {
+        pairWord = randomOtherWord(word.word);
+        correctAnswer = false;
+      }
+      return {
+        type: 'synonym', word, hint, tier,
+        prompt: `Does this definition match <span class="blank-word">${word.word}</span>?<br><br>"${pairWord.definition}"`,
+        ref: `${word.word} (${word.pos})`,
+        options: ['Yes, that matches', 'No, that\'s a different word'],
+        correctIndex: correctAnswer ? 0 : 1,
+      };
+    }
+  }
+}
+
+function startTrainerSession() {
+  const pool = getTrainerPool();
+  let sourceWords;
+
+  if (trainerSetup.mode === 'choose' && trainerSetup.selectedWords.length > 0) {
+    sourceWords = trainerSetup.selectedWords.map(w => WORDS.find(x => x.word === w)).filter(Boolean);
+  } else {
+    sourceWords = null;
+  }
+
+  const used = [];
+  const questions = [];
+  const length = trainerSetup.length;
+
+  for (let i = 0; i < length; i++) {
+    let w;
+    if (sourceWords) {
+      const remaining = sourceWords.filter(x => !used.includes(x.word));
+      const candidates = remaining.length > 0 ? remaining : sourceWords;
+      w = candidates[Math.floor(Math.random() * candidates.length)];
+      used.push(w.word);
+      if (used.length > sourceWords.length) used.length = 0;
+    } else {
+      w = pickWeightedWord(pool, used);
+      used.push(w.word);
+    }
+    const type = pickTypeForWord(w);
+    questions.push(buildExercise(w, type));
+  }
+  trainerSession = { questions, current: 0, missed: [] };
+  renderTrainerExercise();
+}
+
+function renderTrainer() {
+  const pool = getTrainerPool();
+  const container = document.getElementById('trainerContent');
+  if (pool.allSeen.length === 0) {
+    container.innerHTML = `<div class="empty-trainer">No words to train on yet.<small>Come back after today's word to start training.</small></div>`;
+    return;
+  }
+  if (trainerSession && trainerSession.current < trainerSession.questions.length) {
+    renderTrainerExercise();
+    return;
+  }
+  renderTrainerSetup();
+}
+
+function renderTrainerSetup() {
+  const container = document.getElementById('trainerContent');
+  const dict = getDict();
+  const dictWords = Object.keys(dict);
+
+  trainerSetup.selectedWords = trainerSetup.selectedWords.filter(w => dictWords.includes(w));
+
+  const MASTERY_LABEL = { new: 'New', learning: 'Learning', strong: 'Strong' };
+
+  const wordPickerHtml = dictWords.length === 0
+    ? `<div style="font-size:13px;color:var(--text5);font-family:'Helvetica Neue',Arial,sans-serif;padding:10px 0">No saved words yet — save some from Today or History first, or use "Choose for me."</div>`
+    : `
+      <div class="word-picker-list">
+        ${dictWords.map(w => {
+          const checked = trainerSetup.selectedWords.includes(w);
+          const mastery = getMastery(w);
+          return `
+            <div class="word-pick-row ${checked ? 'checked' : ''}" onclick="toggleWordPick('${w}')">
+              <div class="word-pick-check">${checked ? '✓' : ''}</div>
+              <div class="word-pick-name">${w}</div>
+              <div class="word-pick-count">${MASTERY_LABEL[mastery]}</div>
+            </div>`;
+        }).join('')}
+      </div>
+      <div class="pick-actions">
+        <button onclick="selectAllWords()">Select all</button>
+        <button onclick="clearAllWords()">Clear</button>
+      </div>
+    `;
+
+  container.innerHTML = `
+    <div class="setup-card">
+      <h2>Word Trainer</h2>
+      <div class="setup-sub">Exercises get harder as you prove you know a word — recognition first, production once you're strong.</div>
+
+      <div class="setup-section">
+        <div class="setup-label">Word selection</div>
+        <div class="mode-toggle">
+          <button class="mode-btn ${trainerSetup.mode === 'auto' ? 'selected' : ''}" onclick="setTrainerMode('auto')">Choose for me</button>
+          <button class="mode-btn ${trainerSetup.mode === 'choose' ? 'selected' : ''}" onclick="setTrainerMode('choose')">I'll pick</button>
+        </div>
+        ${trainerSetup.mode === 'auto'
+          ? `<div class="setup-sub" style="margin-top:10px;margin-bottom:0">Weighted toward your dictionary, mixed with recent history.</div>`
+          : wordPickerHtml}
+      </div>
+
+      <div class="setup-section">
+        <div class="setup-label">Session length</div>
+        <div class="length-options">
+          ${[5, 8, 12, 20].map(n => `<button class="length-btn ${trainerSetup.length === n ? 'selected' : ''}" onclick="setTrainerLength(${n})">${n}</button>`).join('')}
+        </div>
+      </div>
+
+      ${trainerSetup.mode === 'choose' && trainerSetup.selectedWords.length === 0
+        ? `<div class="setup-warning">Pick at least one word, or switch to "Choose for me."</div>`
+        : ''}
+
+      <button class="btn-start" style="width:100%" ${trainerSetup.mode === 'choose' && trainerSetup.selectedWords.length === 0 ? 'disabled' : ''} onclick="startTrainerSession()">Start Session</button>
+    </div>
+  `;
+}
+
+function setTrainerMode(mode) {
+  trainerSetup.mode = mode;
+  renderTrainerSetup();
+}
+
+function setTrainerLength(n) {
+  trainerSetup.length = n;
+  renderTrainerSetup();
+}
+
+function toggleWordPick(word) {
+  const i = trainerSetup.selectedWords.indexOf(word);
+  if (i === -1) trainerSetup.selectedWords.push(word);
+  else trainerSetup.selectedWords.splice(i, 1);
+  renderTrainerSetup();
+}
+
+function selectAllWords() {
+  trainerSetup.selectedWords = Object.keys(getDict());
+  renderTrainerSetup();
+}
+
+function clearAllWords() {
+  trainerSetup.selectedWords = [];
+  renderTrainerSetup();
+}
+
+function typeLabel(type) {
+  return {
+    sentence: 'Write it', blank: 'Fill the blank', swap: 'Swap it in',
+    define: 'Define it', firstletter: 'First letter', synonym: 'Match check'
+  }[type];
+}
+
+function renderTrainerExercise() {
+  const container = document.getElementById('trainerContent');
+  const s = trainerSession;
+  const q = s.questions[s.current];
+  const pct = Math.round((s.current / s.questions.length) * 100);
+
+  let bodyHtml = '';
+  if (q.type === 'sentence' || q.type === 'swap') {
+    bodyHtml = `
+      <textarea class="exercise-input" id="exInput" placeholder="Type your sentence..."></textarea>
+      <div class="exercise-actions">
+        <button class="btn-submit" id="btnSubmit" onclick="submitFreeform()">Reveal example</button>
+      </div>
+      <div id="revealArea"></div>
+    `;
+  } else if (q.type === 'blank' || q.type === 'firstletter') {
+    bodyHtml = `
+      <input class="exercise-input" style="min-height:auto" id="exInput" placeholder="Type the word..." autocomplete="off" autocapitalize="off"/>
+      <div class="exercise-actions">
+        <button class="btn-submit" id="btnSubmit" onclick="submitBlank()">Check</button>
+      </div>
+      <div id="revealArea"></div>
+    `;
+  } else if (q.type === 'define' || q.type === 'synonym') {
+    bodyHtml = `
+      <div class="choice-list" id="choiceList">
+        ${q.options.map((opt, i) => `<button class="choice-btn" onclick="submitChoice(${i})">${opt}</button>`).join('')}
+      </div>
+      <div id="revealArea"></div>
+    `;
+  }
+
+  const tierBadgeColor = { recognition: '#6B7FD7', light: '#C47A3B', production: '#5BAD8A' }[q.tier];
+
+  container.innerHTML = `
+    <div class="trainer-progress-bar"><div class="trainer-progress-fill" style="width:${pct}%"></div></div>
+    <div class="exercise-card">
+      <div class="exercise-type-label">
+        ${typeLabel(q.type)} · ${s.current + 1} of ${s.questions.length}
+        <span style="color:${tierBadgeColor};margin-left:8px">· ${q.tier}</span>
+      </div>
+      <div class="exercise-prompt">${q.prompt}</div>
+      <div class="exercise-word-ref">${q.ref}</div>
+      <div class="hint-row">
+        <button class="btn-hint" id="btnHint" onclick="showHint()">💡 Hint</button>
+      </div>
+      <div id="hintArea"></div>
+      ${bodyHtml}
+    </div>
+  `;
+}
+
+function showHint() {
+  const s = trainerSession;
+  const q = s.questions[s.current];
+  document.getElementById('hintArea').innerHTML = `<div class="hint-box">${q.hint}</div>`;
+  document.getElementById('btnHint').disabled = true;
+}
+
+function nextExerciseButton() {
+  return `<div class="exercise-actions" style="margin-top:14px"><button class="btn-submit" onclick="nextExercise()">Continue</button></div>`;
+}
+
+function requeueIfMissed(q, correct) {
+  if (correct) return;
+  // insert a copy of this word's exercise 3 questions ahead (or at the end if session is short)
+  const s = trainerSession;
+  const requeuePos = Math.min(s.current + 3, s.questions.length);
+  const newType = pickTypeForWord(q.word); // re-evaluate tier after demotion
+  s.questions.splice(requeuePos, 0, buildExercise(q.word, newType));
+}
+
+function submitFreeform() {
+  const s = trainerSession;
+  const q = s.questions[s.current];
+  // Freeform production: any non-empty attempt counts as "correct" (effort-based, not graded)
+  const attempted = document.getElementById('exInput').value.trim().length > 0;
+  recordTrainerResult(q.word.word, attempted, q.tier);
+  document.getElementById('revealArea').innerHTML = `
+    <div class="reveal-box">
+      <div class="reveal-label">Example usage</div>
+      <div class="reveal-text">"${q.word.example}"</div>
+    </div>
+    ${nextExerciseButton()}
+  `;
+  document.getElementById('btnSubmit').disabled = true;
+  if (isWordSaved(q.word.word)) onUsed(q.word.word);
+}
+
+function submitBlank() {
+  const s = trainerSession;
+  const q = s.questions[s.current];
+  const val = document.getElementById('exInput').value.trim().toLowerCase();
+  const correct = val === q.answer;
+  recordTrainerResult(q.word.word, correct, q.tier);
+  requeueIfMissed(q, correct);
+  document.getElementById('revealArea').innerHTML = `
+    <div class="reveal-box" style="border-left-color:${correct ? '#5BAD8A' : '#d47a7a'}">
+      <div class="reveal-label">${correct ? 'Correct' : 'Not quite — this one will come back around'}</div>
+      <div class="reveal-text">The word was "${q.word.word}". ${q.word.definition}</div>
+    </div>
+    ${nextExerciseButton()}
+  `;
+  document.getElementById('btnSubmit').disabled = true;
+  if (correct && isWordSaved(q.word.word)) onUsed(q.word.word);
+}
+
+function submitChoice(i) {
+  const s = trainerSession;
+  const q = s.questions[s.current];
+  const correct = i === q.correctIndex;
+  recordTrainerResult(q.word.word, correct, q.tier);
+  requeueIfMissed(q, correct);
+  const buttons = document.querySelectorAll('#choiceList .choice-btn');
+  buttons.forEach((b, idx) => {
+    b.onclick = null;
+    if (idx === q.correctIndex) b.classList.add('correct');
+    else if (idx === i) b.classList.add('incorrect');
+  });
+  document.getElementById('revealArea').innerHTML = `
+    <div class="reveal-box">
+      <div class="reveal-label">${correct ? 'Correct' : 'Not quite — this one will come back around'}</div>
+      <div class="reveal-text">${q.word.definition}</div>
+    </div>
+    ${nextExerciseButton()}
+  `;
+  document.getElementById('btnHint').disabled = true;
+  if (correct && isWordSaved(q.word.word)) onUsed(q.word.word);
+}
+
+function nextExercise() {
+  trainerSession.current++;
+  if (trainerSession.current >= trainerSession.questions.length) {
+    renderSessionComplete();
+  } else {
+    renderTrainerExercise();
+  }
+}
+
+function renderSessionComplete() {
+  const container = document.getElementById('trainerContent');
+  container.innerHTML = `
+    <div class="exercise-card session-complete">
+      <div class="sc-emoji">🔥</div>
+      <h2>Session complete</h2>
+      <p>${trainerSession.questions.length} exercises practiced. Come back anytime for another round.</p>
+      <button class="btn-start" onclick="restartTrainer()">New Session</button>
+    </div>
+  `;
+}
+
+function restartTrainer() {
+  trainerSession = null;
+  renderTrainerSetup();
+}
+
 
 // ── Dictionary ───────────────────────────────────────────────────
 function renderDictionary() {
@@ -909,6 +1986,9 @@ function renderDictionary() {
     const usedTd = usedToday(word);
     const useCount = entry.usedDates.length;
     const streak = entry.streak || 0;
+    const mastery = entry.mastery || 'new';
+    const masteryLabel = { new: 'New', learning: 'Learning', strong: 'Strong' }[mastery];
+    const masteryColor = { new: '#888', learning: '#C47A3B', strong: '#5BAD8A' }[mastery];
 
     html += `
       <div class="dict-card">
@@ -916,6 +1996,7 @@ function renderDictionary() {
           <div>
             <span class="dict-word">${word}</span>
             <span class="dict-pos" style="color:${c}">${wData.pos}</span>
+            <span style="font-size:10px;color:${masteryColor};border:1px solid ${masteryColor}50;background:${masteryColor}15;border-radius:10px;padding:2px 8px;margin-left:6px;font-family:'Helvetica Neue',Arial,sans-serif;letter-spacing:0.04em">${masteryLabel}</span>
           </div>
           <div class="dict-actions">
             <button class="btn-sm ${usedTd ? 'used-today' : ''}" onclick="onUsedFromDict('${word}')">
@@ -950,10 +2031,11 @@ function showPage(name) {
   document.querySelectorAll('nav button').forEach(b => b.classList.remove('active'));
   document.getElementById('page-' + name).classList.add('active');
   const btns = document.querySelectorAll('nav button');
-  const map = { today: 0, history: 1, dictionary: 2 };
+  const map = { today: 0, history: 1, dictionary: 2, trainer: 3 };
   btns[map[name]].classList.add('active');
   if (name === 'history') renderHistory();
   if (name === 'dictionary') renderDictionary();
+  if (name === 'trainer') renderTrainer();
 }
 
 // ── Init ─────────────────────────────────────────────────────────
