@@ -1189,6 +1189,27 @@ function getDayIndex() {
   return diff % WORDS.length;
 }
 
+// Tracks the date this person first opened the app, so history only
+// reflects days they actually saw a word — not the word's position
+// in the underlying rotation.
+function getFirstUseDate() {
+  let first = load('lex_first_use', null);
+  if (!first) {
+    first = todayStr();
+    save('lex_first_use', first);
+  }
+  return first;
+}
+
+function daysSinceFirstUse() {
+  const first = getFirstUseDate();
+  const [fy, fm, fd] = first.split('-').map(Number);
+  const firstDate = new Date(fy, fm, fd);
+  const now = new Date();
+  const today = new Date(now.getFullYear(), now.getMonth(), now.getDate());
+  return Math.floor((today - firstDate) / 86400000);
+}
+
 // ── Streak ───────────────────────────────────────────────────────
 function updateStreak() {
   const today = todayStr();
@@ -1367,8 +1388,10 @@ let historyWords = [];
 
 function buildHistoryWords() {
   const idx = getDayIndex();
+  const elapsed = daysSinceFirstUse(); // real days since this person started using the app
+  const count = Math.min(idx, elapsed); // never show more history than actually elapsed
   historyWords = [];
-  for (let i = 0; i < idx; i++) {
+  for (let i = 0; i < count; i++) {
     historyWords.push(WORDS[idx - 1 - i]); // most recent first
   }
 }
@@ -2039,6 +2062,7 @@ function showPage(name) {
 }
 
 // ── Init ─────────────────────────────────────────────────────────
+getFirstUseDate(); // ensures first-use date is recorded on very first launch
 const streak = updateStreak();
 document.getElementById('streakNum').textContent = streak;
 renderToday();
